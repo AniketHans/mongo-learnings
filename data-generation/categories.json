@@ -1,0 +1,122 @@
+[
+  {
+    "_id": 1,
+    "name": "Category 1",
+    "description": "Description for category 1",
+    "createdAt": "2026-02-16T16:07:36.946Z"
+  },
+  {
+    "_id": 2,
+    "name": "Category 2",
+    "description": "Description for category 2",
+    "createdAt": "2026-02-16T16:07:36.946Z"
+  },
+  {
+    "_id": 3,
+    "name": "Category 3",
+    "description": "Description for category 3",
+    "createdAt": "2026-02-16T16:07:36.946Z"
+  },
+  {
+    "_id": 4,
+    "name": "Category 4",
+    "description": "Description for category 4",
+    "createdAt": "2026-02-16T16:07:36.946Z"
+  },
+  {
+    "_id": 5,
+    "name": "Category 5",
+    "description": "Description for category 5",
+    "createdAt": "2026-02-16T16:07:36.946Z"
+  },
+  {
+    "_id": 6,
+    "name": "Category 6",
+    "description": "Description for category 6",
+    "createdAt": "2026-02-16T16:07:36.946Z"
+  },
+  {
+    "_id": 7,
+    "name": "Category 7",
+    "description": "Description for category 7",
+    "createdAt": "2026-02-16T16:07:36.946Z"
+  },
+  {
+    "_id": 8,
+    "name": "Category 8",
+    "description": "Description for category 8",
+    "createdAt": "2026-02-16T16:07:36.946Z"
+  },
+  {
+    "_id": 9,
+    "name": "Category 9",
+    "description": "Description for category 9",
+    "createdAt": "2026-02-16T16:07:36.946Z"
+  },
+  {
+    "_id": 10,
+    "name": "Category 10",
+    "description": "Description for category 10",
+    "createdAt": "2026-02-16T16:07:36.946Z"
+  },
+  {
+    "_id": 11,
+    "name": "Category 11",
+    "description": "Description for category 11",
+    "createdAt": "2026-02-16T16:07:36.946Z"
+  },
+  {
+    "_id": 12,
+    "name": "Category 12",
+    "description": "Description for category 12",
+    "createdAt": "2026-02-16T16:07:36.946Z"
+  },
+  {
+    "_id": 13,
+    "name": "Category 13",
+    "description": "Description for category 13",
+    "createdAt": "2026-02-16T16:07:36.946Z"
+  },
+  {
+    "_id": 14,
+    "name": "Category 14",
+    "description": "Description for category 14",
+    "createdAt": "2026-02-16T16:07:36.946Z"
+  },
+  {
+    "_id": 15,
+    "name": "Category 15",
+    "description": "Description for category 15",
+    "createdAt": "2026-02-16T16:07:36.946Z"
+  },
+  {
+    "_id": 16,
+    "name": "Category 16",
+    "description": "Description for category 16",
+    "createdAt": "2026-02-16T16:07:36.946Z"
+  },
+  {
+    "_id": 17,
+    "name": "Category 17",
+    "description": "Description for category 17",
+    "createdAt": "2026-02-16T16:07:36.946Z"
+  },
+  {
+    "_id": 18,
+    "name": "Category 18",
+    "description": "Description for category 18",
+    "createdAt": "2026-02-16T16:07:36.946Z"
+  },
+  {
+    "_id": 19,
+    "name": "Category 19",
+    "description": "Description for category 19",
+    "createdAt": "2026-02-16T16:07:36.946Z"
+  },
+  {
+    "_id": 20,
+    "name": "Category 20",
+    "description": "Description for category 20",
+    "createdAt": "2026-02-16T16:07:36.946Z"
+  }
+]
