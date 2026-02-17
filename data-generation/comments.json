@@ -1,0 +1,105 @@
+[
+  {
+    "_id": 1,
+    "title": "Understanding MongoDB Indexes",
+    "content": "A deep dive into how indexes improve query performance in MongoDB.",
+    "author": "Emma Wilson",
+    "comments": [
+      { "user": "Liam", "text": "Great explanation!" },
+      { "user": "Olivia", "text": "Indexes were confusing before this." },
+      { "user": "Noah", "text": "Very detailed article." },
+      { "user": "Ava", "text": "Helped optimize my queries." },
+      { "user": "Elijah", "text": "Clear and practical." }
+    ],
+    "metadata": { "views": 1240, "likes": 87 }
+  },
+  {
+    "_id": 2,
+    "title": "Scaling with MongoDB Sharding",
+    "content": "Learn how sharding distributes data across multiple servers.",
+    "author": "Daniel Smith",
+    "comments": [
+      { "user": "Sophia", "text": "Exactly what I needed!" },
+      { "user": "Mason", "text": "Good intro to sharding." },
+      { "user": "Isabella", "text": "Very informative." },
+      { "user": "Logan", "text": "Examples were helpful." },
+      { "user": "Mia", "text": "Thanks for sharing!" },
+      { "user": "James", "text": "Well written guide." },
+      { "user": "Charlotte", "text": "Helped me understand clusters." },
+      { "user": "Benjamin", "text": "Practical tips included." }
+    ],
+    "metadata": { "views": 2105, "likes": 143 }
+  },
+  {
+    "_id": 3,
+    "title": "MongoDB Aggregation Framework Guide",
+    "content": "Step-by-step tutorial on using MongoDB aggregation pipelines.",
+    "author": "Sophia Martinez",
+    "comments": [
+      { "user": "Lucas", "text": "Aggregation finally makes sense." },
+      { "user": "Amelia", "text": "Loved the examples." },
+      { "user": "Henry", "text": "Very powerful feature." },
+      { "user": "Harper", "text": "Helped with my reporting task." },
+      { "user": "Alexander", "text": "More pipeline examples please." },
+      { "user": "Evelyn", "text": "Nicely structured content." },
+      { "user": "Michael", "text": "Great breakdown of stages." },
+      { "user": "Abigail", "text": "Saved me hours of work." },
+      { "user": "Ethan", "text": "Fantastic write-up!" },
+      { "user": "Emily", "text": "Very clear explanations." }
+    ],
+    "metadata": { "views": 3560, "likes": 290 }
+  },
+  {
+    "_id": 4,
+    "title": "Building REST APIs with Node.js and MongoDB",
+    "content": "Learn how to connect MongoDB with a Node.js backend.",
+    "author": "Chris Johnson",
+    "comments": [
+      { "user": "Daniel", "text": "This helped my project a lot." },
+      { "user": "Ella", "text": "Super beginner friendly." },
+      { "user": "Matthew", "text": "Nice integration tips." },
+      { "user": "Scarlett", "text": "Clear step-by-step process." },
+      { "user": "David", "text": "Loved the code examples." },
+      { "user": "Grace", "text": "Easy to follow." },
+      { "user": "Joseph", "text": "Very practical." },
+      { "user": "Chloe", "text": "Worked perfectly for me." },
+      { "user": "Samuel", "text": "Concise and useful." },
+      { "user": "Victoria", "text": "Exactly what I was looking for." },
+      { "user": "Owen", "text": "Good explanation of routes." },
+      { "user": "Hannah", "text": "Helped debug my API." },
+      { "user": "Gabriel", "text": "Very clean structure." },
+      { "user": "Lily", "text": "Nice article!" },
+      { "user": "Carter", "text": "Thanks for this." }
+    ],
+    "metadata": { "views": 4890, "likes": 372 }
+  },
+  {
+    "_id": 5,
+    "title": "MongoDB Data Modeling Best Practices",
+    "content": "Design schemas effectively for performance and scalability.",
+    "author": "Alex Turner",
+    "comments": [
+      { "user": "Zoe", "text": "Data modeling explained well." },
+      { "user": "Nathan", "text": "Very insightful." },
+      { "user": "Leah", "text": "Cleared my doubts." },
+      { "user": "Isaac", "text": "Schema tips were great." },
+      { "user": "Audrey", "text": "Practical advice." },
+      { "user": "Julian", "text": "Really helpful examples." },
+      { "user": "Nora", "text": "Simple and clear." },
+      { "user": "Aaron", "text": "Exactly what I needed." },
+      { "user": "Bella", "text": "Improved my database design." },
+      { "user": "Ryan", "text": "Very well written." },
+      { "user": "Claire", "text": "Thanks for sharing!" },
+      { "user": "Thomas", "text": "Helpful for beginners." },
+      { "user": "Skylar", "text": "Good comparisons." },
+      { "user": "Charles", "text": "Loved the structure." },
+      { "user": "Lucy", "text": "Highly recommended." },
+      { "user": "Adam", "text": "Practical and clear." },
+      { "user": "Sophie", "text": "Nice breakdown of concepts." },
+      { "user": "Eli", "text": "Very useful article." },
+      { "user": "Maya", "text": "Solved my confusion." },
+      { "user": "Leo", "text": "Excellent resource!" }
+    ],
+    "metadata": { "views": 5320, "likes": 415 }
+  }
+]
