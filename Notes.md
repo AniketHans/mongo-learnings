@@ -115,3 +115,67 @@
        1. Fetches all the documents where the key/field has an array as value and the size if the array is equal to the mentioned value
        2. `{field: {$size: <array-length>}}`
           1. Eg: `db.comments.find({"comments": {$size:5}}).limit(1)`
+11. Projection:
+    1. This is used to either show some speific fields in th result or remove some specific fields from the result
+    2. Syntax: `db.<collection>.find({}, { field1: 1, field2: 1 })`
+    3. Here, 1 is used to include a field in the result and 0 is used to exclude a field in the result.
+    4. You cannot include and exclude fields in same query means you can either have `{ field1: 1, field2: 1, ... }` or `{ field1: 0, field2: 0, ... }`
+    5. Here, `_id` field is an exception, you can exclude and include it in any query. It means both `{ field1: 1, field2: 1, _id: 0, ... }` and `{ field1: 0, field2: 0, _id: 1 ... }` are valid.
+    6. Eg:
+       1. `db.comments.find({comments: {$size: 5}},{"comments": 1, "author": 1})`, it returns comments, author and \_id from each document.
+       2. `db.comments.find({comments: {$size: 5}},{"comments": 1, "author": 1, "_id":0})` this removes the \_id from the result
+       3. `db.comments.find({comments: {$size: 5}},{"comments": 0, "author": 0})`, this returns all the fields except comments and author from each document
+       4. `db.comments.find({comments: {$size: 5}},{"comments": 1, "author": 0})`, This is **invalid**. You can either have all the inclusion operations or all the exclusion opeartions. Not a mix of these. \_id is an exception here.
+12. Embedded documents:
+    1. When keys in a document contain other objects or array of objects as values then we refer the document as nested document
+    2. For querying inside nested documents use dot(.) notations
+       1. Syntax: `db.<collection>.find({ "parent.child": value })`
+       2. Eg: `db.comments.find({"comments.user": "Ava"})`, find all the comments where `comments : [{user: "Ava"}]`
+       3. `db.comments.find({ "metadata.views": { $gt: 100 } })` , find all the comments where `metadata : {views : value > 100}`
+    3. `$all`:
+       1. This operator selects the document where the value of a field is an array that contains all the specified elements
+       2. Syntax: `{<field> : { $all: [ value1, value2, ... ]}}`
+          1. `db.comments.find({"comments.user": {$all: ["Ava", "Noah"]}})`, this returns the document having both values for the key
+    4. `$elemMatch`:
+       1. This operator selects the document where the value of a field is an array with at least one element that matches all the specified query criterias
+       2. This is used when you are trying to query multiple keys in an array of object
+       3. Syntax: `{<field> : { $eleMatch: { <query1>, <query2>, ... }}}`
+          1. `db.comments.find({"comments": { $elemMatch: { "user": "Ava", "text": "Helped optimize my queries." }}})`, here we were querying comments.user and comments.text
+13. Update Operations:
+    1. Here, we use `$set` operator
+    2. `updateOne()`
+       1. Syntax: `db.<collection-name>.updateOne( { filter }, { $set: { existingField: newValue, newField: value } } )`
+          1. Eg: `db.categories.updateOne({"name":"Category 1"},{$set: {"description":"This is decription of Category 1", "topSelling":true}})`, updated description and added new field topSelling where the category name is "Category 1"
+    3. `updateMany()`
+       1. Syntax: `db.<collection-name>.updateMany( { filter }, { $set: { existingField: newValue, newField: value } } )`
+          1. `db.categories.updateMany({"name":{$exists: true}},{$set: {"offer":"BOGO"}})`, added new offer field to all the documents where name field exists in them
+    4. `$unset`:
+       1. This is used for removing an existing field
+       2. Syntax: `db.<collection>.updateOne({filter}, {$unset: { <fieldName>: 1 }})`
+          1. `db.categories.updateMany( { "name": { $exists: true } }, { $unset: { "offer": 1 } } )`, this will remove the offer field from all the documents containing name field
+    5. `$rename`:
+       1. This is used to rename an existing field-name to new field-name
+       2. Syntax: `db.<collection>.updateOne({filter}, {$rename: { oldFieldName: newFieldName }})`
+          1. `db.categories.updateOne( { _id: 1 },{ $rename: { "description": "discription" } } )`, renaming the field description to discription where \_id is 1
+14. Updating arrays and Enbedded documents
+    1. `$push`:
+       1. This is used to push new element/object in the array of a document
+       2. Syntax: `db.<collection>.updateOne({filter}, {$push: { <array-field>: "new element" }})`
+          1. `db.comments.updateOne( { _id: 1 }, { $push: { "comments": { "user": "Hihi", "text": "haha" } } } )`, added a new comment object
+          2. `db.comments.updateOne({_id:1},{$push: {"funnyComment": {"user": "Hihi", "text": "haha hihi huhu"}}})`, if array field does not exists then it will create a new field and then add data to it
+    2. `$pop`:
+       1. This will pop the last element from the array of a document
+       2. Syntax: `db.<collection>.updateOne({filter}, {$pop: { <array-field>: <num-value> }})`, the num value can be 1 or -1.
+       3. 1 will result in poping value from the last of the array and -1 will result in poping the value from start of the array
+          1. `db.comments.updateOne({_id:1},{$pop: {"comments": -1}})`, this will pop the first comment from the comments array in the document
+    3. Update a particular key's value in an embedded doc
+       1. Syntax: `db.<collection>.updateOne({filter}, { $set: { <array-key>.$.<field-tobe-updated> : <new value> } })`
+          1. `db.comments.updateOne({_id:1, "comments.user": "Ava"}, { $set: {"comments.$.text": "Haha this is so funny"}})`, this will update the comment.text for document where \_id is 1 and comments.user is Ava
+       2. Here, the `$` is acting as a positional operator storing the position of the queried element in array
+15. Deleting:
+    1. `deleteOne({filter})`:
+       1. This will delete a document based on the filter
+       2. Syntax: `db.<collection>.deleteOne({filter})`
+    2. `deleteMany({filter})`:
+       1. This will delete all the documents satisfying the filter condition
+          1. Syntax: `db.<collection>.deleteMany({filter})`
