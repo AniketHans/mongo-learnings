@@ -253,15 +253,15 @@
       2. Skips documents missing the field.
       3. `db.users.createIndex({ middleName: 1 }, { sparse: true })`
    9. TTL (Time-To-Live) Index:
-   10. Automatically expires documents after a set time.
-   11. Used for logs, sessions, temporary data.
-       ```
-       db.sessions.createIndex(
-          { createdAt: 1 },
-          { expireAfterSeconds: 3600 }
-       )
-       ```
-   12. Unique Index:
+      1. Automatically expires documents after a set time.
+      2. Used for logs, sessions, temporary data.
+         ```
+         db.sessions.createIndex(
+            { createdAt: 1 },
+            { expireAfterSeconds: 3600 }
+         )
+         ```
+   10. Unique Index:
        1. Ensures unique values for a field.
        2. Prevents duplicate entries.
        3. `db.users.createIndex({ email: 1 }, { unique: true })`
@@ -289,90 +289,157 @@
 
 ### Aggregation
 
-1. Aggregation is the process of performing transformations on documents and combining them to produce computed results
-2. Pipeline Stages:
-   1. Aggregation pipeline consist of multiple pipeline stages, each performing a specicfic operation on the input data
-3. Benefits:
-   1. Aggregating data:
-      1. Complex calculations and operations are possible
-   2. Advanced Transformations
-      1. Data can be combined, reshaped and computed for insights
-   3. Efficient Processing
-      1. Aggregation handles large datasets efficiently
-4. `aggregate()`:
-   1. This function is used to perform aggregation operations
-   2. It works with an array of aggregation methods
-   3. Syntax: `db.<collection>.aggregate( [ <aggregation-methods> ])`
-5. Aggregation methods:
-   1. `$match`:
-      1. It filters documents based on specified conditions. It is similar to find() method
-      2. Syntax: `{$match: {<query>}}`
-         1. Eg: `db.products.aggregate( [ { $match: {"categoryId": 5} } ] )`, fetches all the products having categoryId = 5
-         2. Multiple operations: `db.products.aggregate([{$match: {"categoryId": 5}}, {$match: {"stock": {$gt: 25}}}])`
-      3. The results can be further used for processing which is not possible with find()
-   2. `$group`:
-      1. This $group stage groups documents by specified fields and performs aggregate operations on grouped data
-      2. Syntax: `{$group: { _id: "$<field1>", <newField1>: { <accumulator1>: "$<field1>"}, ... }}`
-         1. Eg: `db.products.aggregate([ { $group: {_id: "$categoryId", "Total Stock": {$sum: "$stock"}, "Average Rating": {$avg: "$rating"}  } } ])`, here we are grouping products collection by categoryId and calculting total stocks and avg rating for each category
-      3. Some **Accumulator operators**:
-         1. `$sum`
-         2. `$avg`
-         3. `$min`
-         4. `$max`
-         5. `$count`
-         6. `$push`
-            1. It is used to add elements to an array field within a document
-            2. `db.products.aggregate([{$group: {_id: "$categoryId", "products": {$push: "$name"}}}])`:
-               1. Here, we are grouping products with "categoryId" and creating a field called products containing array of product names that belongs to that category
-         7. `$addToSet`
-   3. `$sort`:
-      1. This is used to sord the results based on a field
-      2. Syntax: `{ $sort: { <field>: 1 } }`
-         1. Eg: `db.products.aggregate([{$group: {_id: "$categoryId", "Total Stock": {$sum: "$stock"}, "Average Rating": {$avg: "$rating"}  }}, {$sort: {"Total Stock":1}}])`
-   4. `$limit` and `$skip`:
-      1. `{ $limit: 10 }`
-      2. `{ $skip: 20 }`
-   5. `$project`:
-      1. The $project stage reshapes documents, includes or excludes fields and perform operation on fields
-      2. Some common **Expression operators** used in projection:
-         1. $sum
-         2. $multiply
-         3. $subtract
-         4. $avg
-         5. $mod
-         6. $divide
-      3. Syntax: `{ $project: { <field1>: <expression> } }`
-         1. Eg:
+1.  Aggregation is the process of performing transformations on documents and combining them to produce computed results
+2.  Pipeline Stages:
+    1. Aggregation pipeline consist of multiple pipeline stages, each performing a specicfic operation on the input data
+3.  Benefits:
+    1. Aggregating data:
+       1. Complex calculations and operations are possible
+    2. Advanced Transformations
+       1. Data can be combined, reshaped and computed for insights
+    3. Efficient Processing
+       1. Aggregation handles large datasets efficiently
+4.  `aggregate()`:
+    1. This function is used to perform aggregation operations
+    2. It works with an array of aggregation methods
+    3. Syntax: `db.<collection>.aggregate( [ <aggregation-methods> ])`
+5.  Aggregation methods:
+    1.  `$match`:
+        1. It filters documents based on specified conditions. It is similar to find() method
+        2. Syntax: `{$match: {<query>}}`
+           1. Eg: `db.products.aggregate( [ { $match: {"categoryId": 5} } ] )`, fetches all the products having categoryId = 5
+           2. Multiple operations: `db.products.aggregate([{$match: {"categoryId": 5}}, {$match: {"stock": {$gt: 25}}}])`
+        3. The results can be further used for processing which is not possible with find()
+    2.  `$group`:
+        1. This $group stage groups documents by specified fields and performs aggregate operations on grouped data
+        2. Syntax: `{$group: { _id: "$<field1>", <newField1>: { <accumulator1>: "$<field1>"}, ... }}`
+           1. Eg: `db.products.aggregate([ { $group: {_id: "$categoryId", "Total Stock": {$sum: "$stock"}, "Average Rating": {$avg: "$rating"}  } } ])`, here we are grouping products collection by categoryId and calculting total stocks and avg rating for each category
+        3. Some **Accumulator operators**:
+           1. `$sum`
+           2. `$avg`
+           3. `$min`
+           4. `$max`
+           5. `$count`
+           6. `$push`
+              1. It is used to add elements to an array field within a document
+              2. `db.products.aggregate([{$group: {_id: "$categoryId", "products": {$push: "$name"}}}])`:
+                 1. Here, we are grouping products with "categoryId" and creating a field called products containing array of product names that belongs to that category
+           7. `$addToSet`
+    3.  `$sort`:
+        1. This is used to sord the results based on a field
+        2. Syntax: `{ $sort: { <field>: 1 } }`
+           1. Eg: `db.products.aggregate([{$group: {_id: "$categoryId", "Total Stock": {$sum: "$stock"}, "Average Rating": {$avg: "$rating"}  }}, {$sort: {"Total Stock":1}}])`
+    4.  `$limit` and `$skip`:
+        1. `{ $limit: 10 }`
+        2. `{ $skip: 20 }`
+    5.  `$project`:
+        1. The $project stage reshapes documents, includes or excludes fields and perform operation on fields
+        2. Some common **Expression operators** used in projection:
+           1. $sum
+           2. $multiply
+           3. $subtract
+           4. $avg
+           5. $mod
+           6. $divide
+        3. Syntax: `{ $project: { <field1>: <expression> } }`
+           1. Eg:
 
-            ```
-            db.products.aggregate(
-               [
-                  {
-                     $match: {
-                        "categoryId": 5
-                     }
-                  },
+              ```
+              db.products.aggregate(
+                 [
+                    {
+                       $match: {
+                          "categoryId": 5
+                       }
+                    },
+                    {
+                       $project: {
+                          _id:0,
+                          "name":1,
+                          "price": 1,
+                          "stock": 1,
+                          "Total value": {
+                             $multiply: [ "$price", "$stock" ]
+                          }
+                       }
+                    }
+                 ]
+              )
+              ```
+
+              1. Here, we are have created an aggregation pipeline of 2 operations
+                 1. Fetch all the products with categoryId = 5
+                 2. Project/show only price, stock and a custom field "Total value" created by multiplying price of each item and total stock
+
+    6.  `$unwind`:
+        1. It flatten arrays
+        2. Syntax: `{ $unwind: "$items" }`
+           1. Eg:`{ _id:1, items: ["a", "b"] }` --> unwind(items) --> `[{ _id:1, items: "a" }, { _id:1, items: "b" }]`
+           2. Eg: `db.comments.aggregate([{ $unwind: "$comments" }, { $group: { _id: "$_id", "totalComments": { $count:{} } } }])`, here we are first unwinding the comments array in each document and then counting the total number of commnet we have per \_id
+           3. Eg: `db.comments.aggregate([{$unwind: '$comments'},{$match: {"author":"Emma Wilson"}}, {$group: {_id: "$author", "user_comments":{$push: "$comments"}}}])`, here user_comments might contain duplicates
+    7.  `$addToSet`:
+        1. This method add elements to an array field while preventing duplicates
+        2. Eg: `db.comments.aggregate([{$unwind: '$comments'},{$match: {"author":"Emma Wilson"}}, {$group: {_id: "$author", "user_comments":{ $addToSet: "$comments" }}}])`, here we are first unwinding the comments for documents with author "Emma" and then add them to an "user_comments" list with no duplicates
+    8.  `$size`: 1. This is used to get length of an array. It can't be used in group
+
+                 ```
+                    db.comments.aggregate(
+                       [
+                          {  $unwind: '$comments'},
+                          {  $match:{
+                             "author":"Emma Wilson"
+                             }
+                          },
+                          { $group: {
+                             _id: "$author",
+                             "user_comments":{
+                                      $addToSet: "$comments"
+                                   }
+                             }
+                          },
+                          {$project: {
+                             _id:1, "user_comments": 1,
+                             "user_comments_length": {
+                                   $size: "$user_comments"}
+                             }
+                          }
+                       ]
+                    )
+
+                 ```
+
+    9.  `$filter`
+
+        > $ vs $$ in MongoDB
+        >
+        > `$field` --> Value of a document field [ Used to access the value of a field in the current document. ]
+        >
+        > `$$var` --> Aggregation variable (system or user-defined) [ Used to access aggregation variables, not document fields. ]
+        1. This is used to filter elements of an array based on specified conditions
+        2. Syntax: `{ $project: { <new_field> : { $filter: { input: '$<array>', as: <variable>, cond: <expression> } } } }`'
+           1. Eg: Fetching all the comments.text values having word "very" in them
+
+              ```
+              db.comments.aggregate([
                   {
                      $project: {
-                        _id:0,
-                        "name":1,
-                        "price": 1,
-                        "stock": 1,
-                        "Total value": {
-                           $multiply: [ "$price", "$stock" ]
+                        very_comments: {
+                        $filter: {
+                           input: "$comments",
+                           as: "comment",
+                           cond: {
+                              $regexMatch: {
+                              input: "$$comment.text",
+                              regex: "\\bvery\\b",
+                              options: "i"
+                              }
+                           }
+                        }
                         }
                      }
                   }
-               ]
-            )
-            ```
+               ])
 
-            1. Here, we are have created an aggregation pipeline of 2 operations
-               1. Fetch all the products with categoryId = 5
-               2. Project/show only price, stock and a custom field "Total value" created by multiplying price of each item and total stock
+              ```
 
-   6. `$unwind`:
-      1. It flatten arrays
-      2. Syntax: `{ $unwind: "$items" }`
-         1. Eg:`{ _id:1, items: ["a", "b"] }` --> unwind(items) --> `[{ _id:1, items: "a" }, { _id:1, items: "b" }]`
-         2. Eg: `db.comments.aggregate([{ $unwind: "$comments" }, { $group: { _id: "$_id", "totalComments": { $count:{} } } }])`, here we are first unwinding the comments array in each document and then counting the total number of commnet we have per \_id
+           1. Here, we have created a custom variable "comment" to hold each value of "comments" array so to access it we have to use `$$` sign. It like `for comment in comments`

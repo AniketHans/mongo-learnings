@@ -101,5 +101,17 @@
       { "user": "Leo", "text": "Excellent resource!" }
     ],
     "metadata": { "views": 5320, "likes": 415 }
+  },
+  {
+    "_id": 6,
+    "title": "Understanding MongoDB Indexes and Aggregation",
+    "content": "A MongoDB.",
+    "author": "Emma Wilson",
+    "comments": [
+      { "user": "Liam", "text": "Great explanation!" },
+      { "user": "Olivia", "text": "Indexes were confusing before this." },
+      { "user": "Haha Singh", "text": "Very detailed articlessss." }
+    ],
+    "metadata": { "views": 1247, "likes": 90 }
   }
 ]
